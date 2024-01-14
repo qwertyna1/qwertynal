@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>game memory</title>
+<style>
+ #board{
+	border: 1px solid black;
+	background-color: Olive;
+	height:350px;
+	width:650px;
+  }
+  .character{
+    background-color: white;
+    width: 120px;
+    height: 120px;
+    padding: 10px;
+    margin: 10px;
+    float: left;
+  }
+  .thief{
+    backroung-color: red;
+  }
+  .hidden
+ {
+    display: none;
+  }
+  .visible
+  {
+   display: block;
+  }
+  }
+</style>
+
+</head>
+
+<body>
+	<div id="board">
+<div class= "character">1</div>
+<div class= "character">2</div>
+<div class= "character">3</div>
+<div class= "character">4</div>
+<div class= "character">5</div>
+<div class= "character">6</div>
+<div class= "character">7</div>
+<div class= "character">8</div>
+
+
+	</div>
+	<input type="button" value="play" onclick="StartGame();">
+  <script>
+  function StartGame(){
+
+  GameLoop();
+  }
+  var loops=0;
+  var visible = 0;
+  var score = 0;
+  function flashcharacter() {
+    var board = document.getElementById("board");
+    var classToSet = "";
+    if(visible){
+      classToSet = "character visible";
+    }
+    else {
+      classToSet = "character hidden";
+    }
+    for(var i=0;i<8;i++){
+      board.children[i].className = classToSet;
+    }
+  }
+  function createCharacters(){
+    var board = document.getElementById("board");
+    for(var i = 0 ;i<8;i++){
+      board.children[i].innerHTML = "Гость";
+      board.children[i].onclick = function(){score-=2;}
+    }
+    var randNum = Math.floor(Math.random()* 8) +1;
+    board.children[randNum-1].innerHTML = "Вор";
+    board.children[randNum-1].onclick = function(){score++;}
+
+  }
+  function GameLoop(){
+  visible = !visible;
+  createCharacters();
+  flashcharacter();
+    loops++;
+    if(loops < 2)
+        setTimeout(GameLoop,3000);
+
+    else
+        alert("твой счет = "+score);
+
+  }
+  </script>
+</body>
+</html>

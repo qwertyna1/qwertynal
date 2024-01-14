@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<script>
+	 	function AddItem(){
+			var newItem = document.createElement("div");
+			newItem.innerHTML = document.getElementById("box").value;
+			newItem.onclick = removeItem;
+			document.getElementById("savedList").appendChild(newItem);
+			saveList();
+		}
+		function removeItem(){
+		document.getElementById("savedList").removeChild(this);
+		saveList();
+		}
+		function saveList(){
+		localStorage.storageList = document.getElementById("savedList").innerHTML;
+
+		}
+		function loadList(){
+		var a = document.getElementById("savedList").innerHTML=localStorage.storageList;
+		for(var i=0; i<savedList.children.lenght;i++){
+			savedList.children[i].onclick = removeItem;
+		}
+
+		}
+	</script>
+</head>
+
+<body>
+	<input type="text" id="box" placeholder="введите заметку">
+<br>
+	<input type="button" VALUE="добавить"onclick="AddItem();">
+<br>
+
+<div id="savedList"></div>
+<script>
+	if(localStorage.storageList){
+loadList();
+	}
+	else
+	{
+	alert("список пуст");
+}
+	</script>
+</body>
+</html>
